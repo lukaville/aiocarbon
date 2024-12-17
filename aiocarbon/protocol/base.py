@@ -29,7 +29,7 @@ class BaseClient:
         self._host = host
         self._port = port
         self._storage = storage or TotalStorage()
-        self.lock = asyncio.Lock(loop=self.loop)
+        self.lock = asyncio.Lock()
 
     @property
     def namespace(self):
@@ -46,7 +46,7 @@ class BaseClient:
             except:
                 log.exception("Exception while sending metrics")
             finally:
-                await asyncio.sleep(self.SEND_PERIOD, loop=self.loop)
+                await asyncio.sleep(self.SEND_PERIOD)
 
     def format_metric_name(self, metric: Metric):
         if self._ns:
