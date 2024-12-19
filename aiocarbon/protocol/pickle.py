@@ -20,7 +20,7 @@ class PickleClient(BaseClient):
         while True:
             try:
                 reader, writer = await asyncio.open_connection(
-                    self._host, self._port, loop=self.loop
+                    self._host, self._port
                 )
 
                 writer.write(header)
